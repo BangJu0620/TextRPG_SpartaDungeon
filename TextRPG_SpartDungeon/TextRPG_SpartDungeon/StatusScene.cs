@@ -48,6 +48,7 @@ namespace TextRPG_SpartDungeon
             string input = Console.ReadLine();
             if (input == "0")
             {
+                Console.Clear();
                 EventManager.RunMainScene(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }

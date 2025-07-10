@@ -47,10 +47,12 @@ namespace TextRPG_SpartDungeon
             string input = Console.ReadLine();
             if (input == "0")
             {
+                Console.Clear();
                 EventManager.RunMainScene(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
             else if (input == "1")
             {
+                Console.Clear();
                 HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
@@ -96,6 +98,7 @@ namespace TextRPG_SpartDungeon
             {
                 if(input == "0")
                 {
+                    Console.Clear();
                     ShopListView(statusScene, inventoryScene, shopScene, player, items, hasItems);
                 }
                 else
@@ -106,7 +109,8 @@ namespace TextRPG_SpartDungeon
                         {
                             if (items[i - 1].isOwned)
                             {
-                                Console.WriteLine("이미 구매한 아이템입니다.");
+                                Console.Clear();
+                                Console.WriteLine("이미 구매한 아이템입니다.\n");
                                 HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
                             }
                             else
@@ -115,13 +119,15 @@ namespace TextRPG_SpartDungeon
                                 {
                                     player.gold -= items[i - 1].itemPrice;
                                     items[i - 1].isOwned = true;
-                                    Console.WriteLine("구매를 완료했습니다.");
+                                    Console.Clear();
+                                    Console.WriteLine("구매를 완료했습니다.\n");
                                     HasItemList.GetItem(items, hasItems);
                                     HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Gold 가 부족합니다.");
+                                    Console.Clear();
+                                    Console.WriteLine("Gold 가 부족합니다.\n");
                                     HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
                                 }
                             }
@@ -131,10 +137,10 @@ namespace TextRPG_SpartDungeon
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.Clear();
+                Console.WriteLine("잘못된 입력입니다.\n");
+                HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
-
-            HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
         }
     }
 }

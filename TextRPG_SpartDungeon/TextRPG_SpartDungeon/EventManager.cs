@@ -22,35 +22,29 @@ namespace TextRPG_SpartDungeon
 
         public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
-            bool isCorrectInput = false;
-
-            while (!isCorrectInput)
+            int startSelect = int.Parse(Console.ReadLine());
+            if (startSelect == 1)
             {
-                int startSelect;
-                isCorrectInput = int.TryParse(Console.ReadLine(), out startSelect);
-                if (startSelect == 1)
-                {
-                    isCorrectInput = true;
-                    statusScene.StatusView(statusScene, inventoryScene, shopScene, player, items, hasItems);
-                    break;
-                }
-                else if (startSelect == 2)
-                {
-                    isCorrectInput = true;
-                    inventoryScene.InventoryView(statusScene, inventoryScene, shopScene, player, items, hasItems);
-                    break;
-                }
-                else if (startSelect == 3)
-                {
-                    isCorrectInput = true;
-                    shopScene.ShopListView(statusScene, inventoryScene, shopScene, player, items, hasItems);
-                    break;
-                }
-                else
-                {
-                    isCorrectInput = false;
-                    Console.WriteLine("잘못된 입력입니다");
-                }
+                Console.Clear();
+                statusScene.StatusView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+            }
+            else if (startSelect == 2)
+            {
+                Console.Clear();
+                inventoryScene.InventoryView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+            }
+            else if (startSelect == 3)
+            {
+                Console.Clear();
+                shopScene.ShopListView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("잘못된 입력입니다.\n");
+
+                WriteText();
+                CheckPlayerInput(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
     }
@@ -64,13 +58,6 @@ namespace TextRPG_SpartDungeon
 
             scene.WriteText();
             scene.CheckPlayerInput(statusScene, inventoryScene, shopScene, player, items, hasItems);
-        }
-
-        public static void BuyItem(string input, List<ItemData> items, Character player)
-        {
-            ShopScene shopScene = new ShopScene();
-
-            
         }
     }
 }

@@ -44,10 +44,12 @@ namespace TextRPG_SpartDungeon
             string input = Console.ReadLine();
             if (input == "0")
             {
+                Console.Clear();
                 EventManager.RunMainScene(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
             else if(input == "1")
             {
+                Console.Clear();
                 HandleEquip(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
@@ -87,6 +89,7 @@ namespace TextRPG_SpartDungeon
             string input = Console.ReadLine();
             if (input == "0")
             {
+                Console.Clear();
                 InventoryView(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
             else
@@ -105,6 +108,7 @@ namespace TextRPG_SpartDungeon
                         }
                     }
                 }
+                Console.Clear();
                 HandleEquip(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
