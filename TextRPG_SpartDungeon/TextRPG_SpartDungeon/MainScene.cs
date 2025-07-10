@@ -18,7 +18,8 @@ namespace TextRPG_SpartDungeon
                 shopScene = new ShopScene(),
                 player = new Character(1, "Chad", "전사", 10, 5, 100, 50000),
                 items = itemList.items,
-                hasItems = hasItemList.hasItems
+                hasItems = hasItemList.hasItems,
+                eventManager = new EventManager()
             };
             
             

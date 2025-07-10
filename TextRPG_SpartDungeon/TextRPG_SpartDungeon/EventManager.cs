@@ -16,7 +16,7 @@ namespace TextRPG_SpartDungeon
         public void WriteText()
         {
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n");
+            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전입장\n5. 휴식하기");
             Console.Write("원하시는 행동을 입력해주세요.\n>>");
         }
 
@@ -39,6 +39,14 @@ namespace TextRPG_SpartDungeon
                 gameContext.shopScene.ShopListView(gameContext);
             }
             else if (startSelect == 4)
+            {
+                Console.Clear();
+                Console.WriteLine("미구현");
+
+                WriteText();
+                CheckPlayerInput(gameContext);
+            }
+            else if (startSelect == 5)
             {
                 Console.Clear();
                 gameContext.eventManager.Rest(gameContext);
@@ -84,6 +92,7 @@ namespace TextRPG_SpartDungeon
                 if(gameContext.player.gold >= 500)
                 {
                     gameContext.player.gold -= 500;
+                    gameContext.player.healthPoint = 100;
                     Console.Clear();
                     Console.WriteLine("휴식을 완료했습니다.\n");
                     Rest(gameContext);
