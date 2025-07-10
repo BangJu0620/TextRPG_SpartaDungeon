@@ -17,7 +17,7 @@ namespace TextRPG_SpartDungeon
 
         }
 
-        public void BuyItem(Item item, Character user)
+        public void BuyItem(ItemData item, Character user)
         {
             if (!item.isOwned)
             {
