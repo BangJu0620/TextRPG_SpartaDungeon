@@ -10,16 +10,18 @@ namespace TextRPG_SpartDungeon
         {
             StatusScene statusScene = new StatusScene();
             LoadMainScene loadMainScene = new LoadMainScene();
+            InventoryScene inventoryScene = new InventoryScene();
             Character player = new Character(1, "Chad", "전사", 10, 5, 100, 1500);
+            ItemList itemList = new ItemList();
             
 
             ToWriteText writeTxt = loadMainScene.WriteText;
             ToCheckPlayerInput checkPlayerInput = loadMainScene.CheckPlayerInput;
 
             writeTxt();
-            checkPlayerInput(statusScene, player);
+            checkPlayerInput(statusScene, inventoryScene, player, itemList.items);
 
-            
+            Console.WriteLine(itemList.items[0].itemPrice);
 
         }
     }

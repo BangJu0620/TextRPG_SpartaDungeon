@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG_SpartDungeon
 {
-    internal class ShopScene
+    public class ShopScene
     {
     }
 
