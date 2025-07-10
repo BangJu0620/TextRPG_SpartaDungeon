@@ -1,0 +1,14 @@
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\bin\Debug\net8.0\TextRPG_SpartDungeon.exe
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\bin\Debug\net8.0\TextRPG_SpartDungeon.deps.json
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\bin\Debug\net8.0\TextRPG_SpartDungeon.runtimeconfig.json
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\bin\Debug\net8.0\TextRPG_SpartDungeon.dll
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\bin\Debug\net8.0\TextRPG_SpartDungeon.pdb
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.AssemblyInfoInputs.cache
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.AssemblyInfo.cs
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.csproj.CoreCompileInputs.cache
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.dll
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\refint\TextRPG_SpartDungeon.dll
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.pdb
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\TextRPG_SpartDungeon.genruntimeconfig.cache
+C:\Users\BangJu\source\repos\TextRPG_SpartDungeon\TextRPG_SpartDungeon\obj\Debug\net8.0\ref\TextRPG_SpartDungeon.dll
