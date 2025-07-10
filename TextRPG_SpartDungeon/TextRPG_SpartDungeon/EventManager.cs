@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TextRPG_SpartDungeon
 {
     public delegate void ToWriteText();
-    public delegate void ToCheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems);
+    public delegate void ToCheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems);
 
     
     public class LoadMainScene
@@ -20,7 +20,7 @@ namespace TextRPG_SpartDungeon
             Console.Write("원하시는 행동을 입력해주세요.\n>>");
         }
 
-        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             bool isCorrectInput = false;
 
@@ -31,18 +31,19 @@ namespace TextRPG_SpartDungeon
                 if (startSelect == 1)
                 {
                     isCorrectInput = true;
-                    statusScene.StatusView(player, inventoryScene, items, hasItems);
+                    statusScene.StatusView(statusScene, inventoryScene, shopScene, player, items, hasItems);
                     break;
                 }
                 else if (startSelect == 2)
                 {
                     isCorrectInput = true;
-                    inventoryScene.InventoryView(statusScene, inventoryScene, player, items, hasItems);
+                    inventoryScene.InventoryView(statusScene, inventoryScene, shopScene, player, items, hasItems);
                     break;
                 }
                 else if (startSelect == 3)
                 {
                     isCorrectInput = true;
+                    shopScene.ShopListView(statusScene, inventoryScene, shopScene, player, items, hasItems);
                     break;
                 }
                 else
@@ -54,61 +55,22 @@ namespace TextRPG_SpartDungeon
         }
     }
 
-    public class EnterShop
-    {
-        public void WriteList(Character user)
-        {
-            Console.WriteLine($"[보유골드]\n{user.gold} G\n");
-            Console.WriteLine($"[아이템 목록]");
-            Console.Write("원하시는 행동을 입력해주세요.\n>>");
-        }
 
-        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
-        {
-            bool isCorrectInput = false;
-
-            while (!isCorrectInput)
-            {
-                int startSelect;
-                isCorrectInput = int.TryParse(Console.ReadLine(), out startSelect);
-                if (startSelect == 1)
-                {
-                    isCorrectInput = true;
-                    statusScene.StatusView(player, inventoryScene, items, hasItems);
-                    break;
-                }
-                else if (startSelect == 2)
-                {
-                    isCorrectInput = true;
-                    inventoryScene.InventoryView(statusScene, inventoryScene, player, items, hasItems);
-                    break;
-                }
-                else if (startSelect == 3)
-                {
-                    isCorrectInput = true;
-                    break;
-                }
-                else
-                {
-                    isCorrectInput = false;
-                    Console.WriteLine("잘못된 입력입니다");
-                }
-            }
-        }
-    }
     public class EventManager
     {
-        public static void RunMainScene(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public static void RunMainScene(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             LoadMainScene scene = new LoadMainScene();
 
             scene.WriteText();
-            scene.CheckPlayerInput(statusScene, inventoryScene, player, items, hasItems);
+            scene.CheckPlayerInput(statusScene, inventoryScene, shopScene, player, items, hasItems);
         }
 
-        public static void RunHandleEquipScene()
+        public static void BuyItem(string input, List<ItemData> items, Character player)
         {
+            ShopScene shopScene = new ShopScene();
 
+            
         }
     }
 }

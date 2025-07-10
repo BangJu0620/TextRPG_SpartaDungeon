@@ -11,7 +11,7 @@ namespace TextRPG_SpartDungeon
 {
     public class StatusScene
     {
-        public void StatusView(Character user, InventoryScene inventoryScene, List<ItemData> items, List<ItemData> hasItems)
+        public void StatusView(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             int totalItemAttackPoint = 0;
             int totalItemDefensePoint = 0;
@@ -25,16 +25,22 @@ namespace TextRPG_SpartDungeon
                 }
             }
 
-            Console.WriteLine($"Lv. {user.level.ToString("D2")}");
-            Console.WriteLine($"{user.name} ( {user.job} )");
-            Console.Write($"공격력 : {user.attackPoint + totalItemAttackPoint}");
-            if(totalItemAttackPoint > 0) Console.WriteLine($" {totalItemAttackPoint}");
+            Console.WriteLine($"Lv. {player.level.ToString("D2")}");
+
+            Console.WriteLine($"{player.name} ( {player.job} )");
+
+            Console.Write($"공격력 : {player.attackPoint + totalItemAttackPoint}");
+            if(totalItemAttackPoint > 0) Console.WriteLine($" (+{totalItemAttackPoint})");
             else Console.WriteLine();
-            Console.Write($"방어력 : {user.defensePoint + totalItemDefensePoint}");
-            if (totalItemDefensePoint > 0) Console.WriteLine($" {totalItemDefensePoint}");
+
+            Console.Write($"방어력 : {player.defensePoint + totalItemDefensePoint}");
+            if (totalItemDefensePoint > 0) Console.WriteLine($" (+{totalItemDefensePoint})");
             else Console.WriteLine();
-            Console.WriteLine($"체 력 : {user.healthPoint}");
-            Console.WriteLine($"Gold : {user.attackPoint} G");
+
+            Console.WriteLine($"체 력 : {player.healthPoint}");
+
+            Console.WriteLine($"Gold : {player.gold} G");
+
             Console.WriteLine("\n0. 나가기");
             Console.WriteLine("\n원하시는 행동을 입력해주세요.");
             Console.Write(">>");
@@ -42,7 +48,7 @@ namespace TextRPG_SpartDungeon
             string input = Console.ReadLine();
             if (input == "0")
             {
-                EventManager.RunMainScene(this, inventoryScene, user, items, hasItems);
+                EventManager.RunMainScene(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
     }

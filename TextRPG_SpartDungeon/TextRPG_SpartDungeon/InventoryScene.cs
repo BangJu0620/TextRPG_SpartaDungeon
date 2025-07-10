@@ -8,7 +8,7 @@ namespace TextRPG_SpartDungeon
 {
     public class InventoryScene
     {
-        public void InventoryView(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public void InventoryView(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             Console.WriteLine("[아이템 목록]");
             foreach(ItemData item in hasItems)
@@ -39,19 +39,22 @@ namespace TextRPG_SpartDungeon
             Console.WriteLine("\n1. 장착 관리");
             Console.WriteLine("0. 나가기");
 
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
+
             string input = Console.ReadLine();
             if (input == "0")
             {
-                EventManager.RunMainScene(statusScene, inventoryScene, player, items, hasItems);
+                EventManager.RunMainScene(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
             else if(input == "1")
             {
-                HandleEquip(statusScene, inventoryScene, player, items, hasItems);
+                HandleEquip(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
 
-        public void HandleEquip(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public void HandleEquip(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
+            Console.WriteLine("[아이템 목록]");
             foreach (ItemData item in hasItems)
             {
                 if (item.isEquipped == true)
@@ -79,28 +82,30 @@ namespace TextRPG_SpartDungeon
             }
             Console.WriteLine("\n0. 나가기");
 
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
+
             string input = Console.ReadLine();
             if (input == "0")
             {
-                InventoryView(statusScene, inventoryScene, player, items, hasItems);
+                InventoryView(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
             else
             {
                 for(int i = 1; i < hasItems.Count + 1; i++)
                 {
-                    if(input == "i")
+                    if(int.Parse(input) == i)
                     {
-                        if (hasItems[i].isEquipped)
+                        if (hasItems[i - 1].isEquipped)
                         {
-                            hasItems[i].isEquipped = false;
+                            hasItems[i - 1].isEquipped = false;
                         }
                         else
                         {
-                            hasItems[i].isEquipped = true;
+                            hasItems[i - 1].isEquipped = true;
                         }
                     }
                 }
-                HandleEquip(statusScene, inventoryScene, player, items, hasItems);
+                HandleEquip(statusScene, inventoryScene, shopScene, player, items, hasItems);
             }
         }
     }
@@ -146,7 +151,7 @@ namespace TextRPG_SpartDungeon
     {
         public List<ItemData> hasItems = new List<ItemData>();
 
-        public void GetItem(List<ItemData> items, List<ItemData> hasItems)
+        public static void GetItem(List<ItemData> items, List<ItemData> hasItems)
         {
             foreach(ItemData item in items)
             {
