@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TextRPG_SpartDungeon
 {
     public delegate void ToWriteText();
-    public delegate void ToCheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems);
+    public delegate void ToCheckPlayerInput(GameContext gameContext);
 
     
     public class LoadMainScene
@@ -20,23 +20,28 @@ namespace TextRPG_SpartDungeon
             Console.Write("원하시는 행동을 입력해주세요.\n>>");
         }
 
-        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public void CheckPlayerInput(GameContext gameContext)
         {
             int startSelect = int.Parse(Console.ReadLine());
             if (startSelect == 1)
             {
                 Console.Clear();
-                statusScene.StatusView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                gameContext.statusScene.StatusView(gameContext);
             }
             else if (startSelect == 2)
             {
                 Console.Clear();
-                inventoryScene.InventoryView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                gameContext.inventoryScene.InventoryView(gameContext);
             }
             else if (startSelect == 3)
             {
                 Console.Clear();
-                shopScene.ShopListView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                gameContext.shopScene.ShopListView(gameContext);
+            }
+            else if (startSelect == 4)
+            {
+                Console.Clear();
+                gameContext.eventManager.Rest(gameContext);
             }
             else
             {
@@ -44,7 +49,7 @@ namespace TextRPG_SpartDungeon
                 Console.WriteLine("잘못된 입력입니다.\n");
 
                 WriteText();
-                CheckPlayerInput(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                CheckPlayerInput(gameContext);
             }
         }
     }
@@ -52,12 +57,56 @@ namespace TextRPG_SpartDungeon
 
     public class EventManager
     {
-        public static void RunMainScene(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public static void RunMainScene(GameContext gameContext)
         {
             LoadMainScene scene = new LoadMainScene();
 
             scene.WriteText();
-            scene.CheckPlayerInput(statusScene, inventoryScene, shopScene, player, items, hasItems);
+            scene.CheckPlayerInput(gameContext);
         }
+
+        public void Rest(GameContext gameContext)
+        {
+            Console.WriteLine($"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {gameContext.player.gold} G");
+            Console.WriteLine("\n1. 휴식하기");
+            Console.WriteLine("0. 나가기");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
+
+            int input = int.Parse(Console.ReadLine());
+
+            if(input == 0)
+            {
+                Console.Clear();
+                RunMainScene(gameContext);
+            }
+            else if(input == 1)
+            {
+                if(gameContext.player.gold >= 500)
+                {
+                    gameContext.player.gold -= 500;
+                    Console.Clear();
+                    Console.WriteLine("휴식을 완료했습니다.\n");
+                    Rest(gameContext);
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Gold 가 부족합니다.");
+                    Rest(gameContext);
+                }
+            }
+        }
+    }
+
+    public class GameContext
+    {
+        public LoadMainScene loadMainScene;
+        public StatusScene statusScene;
+        public InventoryScene inventoryScene;
+        public ShopScene shopScene;
+        public Character player;
+        public List<ItemData> items;
+        public List<ItemData > hasItems;
+        public EventManager eventManager;
     }
 }

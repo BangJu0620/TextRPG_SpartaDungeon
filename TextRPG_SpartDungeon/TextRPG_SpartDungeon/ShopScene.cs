@@ -8,12 +8,12 @@ namespace TextRPG_SpartDungeon
 {
     public class ShopScene
     {
-        public void ShopListView(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public void ShopListView(GameContext gameContext)
         {
-            Console.WriteLine($"[보유골드]\n{player.gold} G\n");
+            Console.WriteLine($"[보유골드]\n{gameContext.player.gold} G\n");
             Console.WriteLine($"[아이템 목록]");
 
-            foreach (ItemData item in items)
+            foreach (ItemData item in gameContext.items)
             {
                 if (item.isOwned == true)
                 {
@@ -48,42 +48,42 @@ namespace TextRPG_SpartDungeon
             if (input == "0")
             {
                 Console.Clear();
-                EventManager.RunMainScene(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                EventManager.RunMainScene(gameContext);
             }
             else if (input == "1")
             {
                 Console.Clear();
-                HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                HandleBuy(gameContext);
             }
         }
 
-        public void HandleBuy(StatusScene statusScene, InventoryScene inventoryScene, ShopScene shopScene, Character player, List<ItemData> items, List<ItemData> hasItems)
+        public void HandleBuy(GameContext gameContext)
         {
-            Console.WriteLine($"[보유골드]\n{player.gold} G\n");
+            Console.WriteLine($"[보유골드]\n{gameContext.player.gold} G\n");
             Console.WriteLine($"[아이템 목록]");
 
-            foreach (ItemData item in items)
+            foreach (ItemData item in gameContext.items)
             {
                 if (item.isOwned == true)
                 {
                     if (item.itemAttackPoint != 0)
                     {
-                        Console.WriteLine($"- {items.IndexOf(item) + 1} {item.itemName}\t| 공격력 +{item.itemAttackPoint}\t| {item.itemDescription}\t|  구매완료");
+                        Console.WriteLine($"- {gameContext.items.IndexOf(item) + 1} {item.itemName}\t| 공격력 +{item.itemAttackPoint}\t| {item.itemDescription}\t|  구매완료");
                     }
                     else if (item.itemDefensePoint != 0)
                     {
-                        Console.WriteLine($"- {items.IndexOf(item) + 1} {item.itemName}\t| 방어력 +{item.itemDefensePoint}\t| {item.itemDescription}\t|  구매완료");
+                        Console.WriteLine($"- {gameContext.items.IndexOf(item) + 1} {item.itemName}\t| 방어력 +{item.itemDefensePoint}\t| {item.itemDescription}\t|  구매완료");
                     }
                 }
                 else
                 {
                     if (item.itemAttackPoint != 0)
                     {
-                        Console.WriteLine($"- {items.IndexOf(item) + 1} {item.itemName}\t| 공격력 +{item.itemAttackPoint}\t| {item.itemDescription}\t|  {item.itemPrice} G");
+                        Console.WriteLine($"- {gameContext.items.IndexOf(item) + 1} {item.itemName}\t| 공격력 +{item.itemAttackPoint}\t| {item.itemDescription}\t|  {item.itemPrice} G");
                     }
                     else if (item.itemDefensePoint != 0)
                     {
-                        Console.WriteLine($"- {items.IndexOf(item) + 1} {item.itemName}\t| 방어력 +{item.itemDefensePoint}\t| {item.itemDescription}\t|  {item.itemPrice} G");
+                        Console.WriteLine($"- {gameContext.items.IndexOf(item) + 1} {item.itemName}\t| 방어력 +{item.itemDefensePoint}\t| {item.itemDescription}\t|  {item.itemPrice} G");
                     }
                 }
             }
@@ -94,41 +94,41 @@ namespace TextRPG_SpartDungeon
 
             string input = Console.ReadLine();
 
-            if (0 <= int.Parse(input) && int.Parse(input) <= items.Count)
+            if (0 <= int.Parse(input) && int.Parse(input) <= gameContext.items.Count)
             {
                 if(input == "0")
                 {
                     Console.Clear();
-                    ShopListView(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                    ShopListView(gameContext);
                 }
                 else
                 {
-                    for (int i = 1; i <= items.Count; i++)
+                    for (int i = 1; i <= gameContext.items.Count; i++)
                     {
                         if (int.Parse(input) == i)
                         {
-                            if (items[i - 1].isOwned)
+                            if (gameContext.items[i - 1].isOwned)
                             {
                                 Console.Clear();
                                 Console.WriteLine("이미 구매한 아이템입니다.\n");
-                                HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                                HandleBuy(gameContext);
                             }
                             else
                             {
-                                if (player.gold >= items[i - 1].itemPrice)
+                                if (gameContext.player.gold >= gameContext.items[i - 1].itemPrice)
                                 {
-                                    player.gold -= items[i - 1].itemPrice;
-                                    items[i - 1].isOwned = true;
+                                    gameContext.player.gold -= gameContext.items[i - 1].itemPrice;
+                                    gameContext.items[i - 1].isOwned = true;
                                     Console.Clear();
                                     Console.WriteLine("구매를 완료했습니다.\n");
-                                    HasItemList.GetItem(items, hasItems);
-                                    HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                                    HasItemList.GetItem(gameContext);
+                                    HandleBuy(gameContext);
                                 }
                                 else
                                 {
                                     Console.Clear();
                                     Console.WriteLine("Gold 가 부족합니다.\n");
-                                    HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                                    HandleBuy(gameContext);
                                 }
                             }
                         }
@@ -139,7 +139,7 @@ namespace TextRPG_SpartDungeon
             {
                 Console.Clear();
                 Console.WriteLine("잘못된 입력입니다.\n");
-                HandleBuy(statusScene, inventoryScene, shopScene, player, items, hasItems);
+                HandleBuy(gameContext);
             }
         }
     }

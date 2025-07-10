@@ -8,20 +8,26 @@ namespace TextRPG_SpartDungeon
         
         static void Main(string[] args)
         {
-            StatusScene statusScene = new StatusScene();
-            LoadMainScene loadMainScene = new LoadMainScene();
-            InventoryScene inventoryScene = new InventoryScene();
-            ShopScene shopScene = new ShopScene();
-            Character player = new Character(1, "Chad", "전사", 10, 5, 100, 1500);
             ItemList itemList = new ItemList();
             HasItemList hasItemList = new HasItemList();
+            GameContext gameContext = new GameContext
+            {
+                statusScene = new StatusScene(),
+                loadMainScene = new LoadMainScene(),
+                inventoryScene = new InventoryScene(),
+                shopScene = new ShopScene(),
+                player = new Character(1, "Chad", "전사", 10, 5, 100, 50000),
+                items = itemList.items,
+                hasItems = hasItemList.hasItems
+            };
+            
             
 
-            ToWriteText writeTxt = loadMainScene.WriteText;
-            ToCheckPlayerInput checkPlayerInput = loadMainScene.CheckPlayerInput;
+            ToWriteText writeTxt = gameContext.loadMainScene.WriteText;
+            ToCheckPlayerInput checkPlayerInput = gameContext.loadMainScene.CheckPlayerInput;
 
             writeTxt();
-            checkPlayerInput(statusScene, inventoryScene, shopScene, player, itemList.items, hasItemList.hasItems);
+            checkPlayerInput(gameContext);
 
 
         }
