@@ -13,10 +13,26 @@ namespace TextRPG_SpartDungeon
     {
         public void StatusView(Character user, InventoryScene inventoryScene, List<ItemData> items, List<ItemData> hasItems)
         {
+            int totalItemAttackPoint = 0;
+            int totalItemDefensePoint = 0;
+
+            foreach(ItemData item in hasItems)
+            {
+                if (item.isEquipped)
+                {
+                    totalItemAttackPoint += item.itemAttackPoint;
+                    totalItemDefensePoint += item.itemDefensePoint;
+                }
+            }
+
             Console.WriteLine($"Lv. {user.level.ToString("D2")}");
             Console.WriteLine($"{user.name} ( {user.job} )");
-            Console.WriteLine($"공격력 : {user.attackPoint}");
-            Console.WriteLine($"방어력 : {user.defensePoint}");
+            Console.Write($"공격력 : {user.attackPoint + totalItemAttackPoint}");
+            if(totalItemAttackPoint > 0) Console.WriteLine($" {totalItemAttackPoint}");
+            else Console.WriteLine();
+            Console.Write($"방어력 : {user.defensePoint + totalItemDefensePoint}");
+            if (totalItemDefensePoint > 0) Console.WriteLine($" {totalItemDefensePoint}");
+            else Console.WriteLine();
             Console.WriteLine($"체 력 : {user.healthPoint}");
             Console.WriteLine($"Gold : {user.attackPoint} G");
             Console.WriteLine("\n0. 나가기");
