@@ -11,7 +11,7 @@ namespace TextRPG_SpartDungeon
 {
     public class StatusScene
     {
-        public void StatusView(Character user, InventoryScene inventoryScene, List<ItemData> items)
+        public void StatusView(Character user, InventoryScene inventoryScene, List<ItemData> items, List<ItemData> hasItems)
         {
             Console.WriteLine($"Lv. {user.level.ToString("D2")}");
             Console.WriteLine($"{user.name} ( {user.job} )");
@@ -26,7 +26,7 @@ namespace TextRPG_SpartDungeon
             string input = Console.ReadLine();
             if (input == "0")
             {
-                EventManager.RunMainScene(this, inventoryScene, user, items);
+                EventManager.RunMainScene(this, inventoryScene, user, items, hasItems);
             }
         }
     }

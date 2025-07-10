@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TextRPG_SpartDungeon
 {
     public delegate void ToWriteText();
-    public delegate void ToCheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items);
+    public delegate void ToCheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems);
 
     
     public class LoadMainScene
@@ -20,7 +20,7 @@ namespace TextRPG_SpartDungeon
             Console.Write("원하시는 행동을 입력해주세요.\n>>");
         }
 
-        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items)
+        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             bool isCorrectInput = false;
 
@@ -31,13 +31,13 @@ namespace TextRPG_SpartDungeon
                 if (startSelect == 1)
                 {
                     isCorrectInput = true;
-                    statusScene.StatusView(player, inventoryScene, items);
+                    statusScene.StatusView(player, inventoryScene, items, hasItems);
                     break;
                 }
                 else if (startSelect == 2)
                 {
                     isCorrectInput = true;
-                    inventoryScene.InventoryView(items);
+                    inventoryScene.InventoryView(statusScene, inventoryScene, player, items, hasItems);
                     break;
                 }
                 else if (startSelect == 3)
@@ -63,7 +63,7 @@ namespace TextRPG_SpartDungeon
             Console.Write("원하시는 행동을 입력해주세요.\n>>");
         }
 
-        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items)
+        public void CheckPlayerInput(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             bool isCorrectInput = false;
 
@@ -74,13 +74,13 @@ namespace TextRPG_SpartDungeon
                 if (startSelect == 1)
                 {
                     isCorrectInput = true;
-                    statusScene.StatusView(player, inventoryScene, items);
+                    statusScene.StatusView(player, inventoryScene, items, hasItems);
                     break;
                 }
                 else if (startSelect == 2)
                 {
                     isCorrectInput = true;
-                    inventoryScene.InventoryView(items);
+                    inventoryScene.InventoryView(statusScene, inventoryScene, player, items, hasItems);
                     break;
                 }
                 else if (startSelect == 3)
@@ -98,12 +98,17 @@ namespace TextRPG_SpartDungeon
     }
     public class EventManager
     {
-        public static void RunMainScene(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items)
+        public static void RunMainScene(StatusScene statusScene, InventoryScene inventoryScene, Character player, List<ItemData> items, List<ItemData> hasItems)
         {
             LoadMainScene scene = new LoadMainScene();
 
             scene.WriteText();
-            scene.CheckPlayerInput(statusScene, inventoryScene, player, items);
+            scene.CheckPlayerInput(statusScene, inventoryScene, player, items, hasItems);
+        }
+
+        public static void RunHandleEquipScene()
+        {
+
         }
     }
 }
