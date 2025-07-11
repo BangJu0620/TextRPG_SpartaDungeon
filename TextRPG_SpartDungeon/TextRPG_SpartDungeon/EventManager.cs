@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TextRPG_SpartDungeon
@@ -16,7 +17,7 @@ namespace TextRPG_SpartDungeon
         public void WriteText()
         {
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전입장\n5. 휴식하기");
+            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전입장\n5. 휴식하기\n6. 저장하기/불러오기");
             Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
         }
 
@@ -50,6 +51,11 @@ namespace TextRPG_SpartDungeon
             {
                 Console.Clear();
                 gameContext.eventManager.Rest(gameContext);
+            }
+            else if(startSelect == 6)
+            {
+                Console.Clear();
+                gameContext.saveLoadData.SaveLoadScene(gameContext);
             }
             else
             {
@@ -121,6 +127,99 @@ namespace TextRPG_SpartDungeon
         }
     }
 
+    public class SaveLoadData
+    {
+        public void SaveLoadScene(GameContext gameContext)
+        {
+            Console.WriteLine("저장하기 / 불러오기");
+            Console.WriteLine("\n1. 저장하기\n2. 불러오기\n0. 나가기");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>>");
+
+            string input = Console.ReadLine();
+
+            if(input == "0")
+            {
+                Console.Clear();
+                EventManager.RunMainScene(gameContext);
+            }
+            else if(input == "1")
+            {
+                Console.Clear();
+                SaveItemData(gameContext);
+                SaveLoadScene(gameContext);
+            }
+            else if(input == "2")
+            {
+                Console.Clear();
+                LoadItemData(gameContext);
+                SaveLoadScene(gameContext);
+            }
+        }
+        public static void SaveItemData(GameContext gameContext)
+        {
+            using (StreamWriter writer = new StreamWriter(gameContext.filePath))
+            {
+                writer.WriteLine("Name, Type, AttackPoint, DefensePoint, Description, Price, IsOwned, IsEquipped");
+
+                foreach(var item in gameContext.items)
+                {
+                    string line = $"{item.itemName}, {item.itemType}, {item.itemAttackPoint}, {item.itemDefensePoint}, {item.itemDescription}, {item.itemPrice}, {item.isOwned}, {item.isEquipped}";
+                    writer.WriteLine(line);
+                }
+            }
+
+            Console.WriteLine("저장 완료");
+        }
+
+        public static ItemList LoadItemData(GameContext gameContext)
+        {
+            ItemList items = new ItemList();
+
+            if (!File.Exists(gameContext.filePath))
+            {
+                Console.WriteLine("저장된 파일이 없습니다.");
+                return items;
+            }
+
+            string[] lines = File.ReadAllLines(gameContext.filePath);
+
+            for(int i = 1; i < lines.Length; i++)
+            {
+                string[] parts = lines[i].Split(',');
+
+                if(parts.Length == 8)
+                {
+                    string name = parts[0];
+                    string type = parts[1];
+                    int AP = int.Parse(parts[2]);
+                    int DP = int.Parse(parts[3]);
+                    string description = parts[4];
+                    int price = int.Parse(parts[5]);
+                    bool owned;
+                    if (parts[6] == "true")
+                    {
+                        owned = true;
+                    }
+                    else
+                    {
+                        owned = false;
+                    }
+                    bool equipped;
+                    if (parts[7] == "true")
+                    {
+                        equipped = true;
+                    }
+                    else
+                    {
+                        equipped = false;
+                    }
+                }
+            }
+            Console.WriteLine("불러오기 완료");
+            return items;
+        }
+    }
+
     public class GameContext
     {
         public LoadMainScene loadMainScene;
@@ -134,5 +233,8 @@ namespace TextRPG_SpartDungeon
         public List<Dungeon> dungeons;
         public Random random;
         public DungeonScene dungeonScene;
+        public ItemData itemData;
+        public SaveLoadData saveLoadData;
+        public string filePath;
     }
 }

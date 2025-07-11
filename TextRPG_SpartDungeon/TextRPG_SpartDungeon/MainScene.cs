@@ -23,9 +23,10 @@ namespace TextRPG_SpartDungeon
                 eventManager = new EventManager(),
                 dungeons = dungeonList.dungeons,
                 random = new Random(),
-                dungeonScene = new DungeonScene()
+                dungeonScene = new DungeonScene(),
+                saveLoadData = new SaveLoadData(),
+                filePath = "save"
             };
-
 
             ToWriteText writeTxt = gameContext.loadMainScene.WriteText;
             ToCheckPlayerInput checkPlayerInput = gameContext.loadMainScene.CheckPlayerInput;

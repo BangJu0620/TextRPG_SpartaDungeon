@@ -128,16 +128,6 @@ namespace TextRPG_SpartDungeon
                 }
             }
         }
-
-        public void DungeonClearLossHealthPoint(GameContext gameContext)
-        {
-
-        }
-
-        public void DungeonClearGetReward()
-        {
-
-        }
     }
 
     public class Dungeon
