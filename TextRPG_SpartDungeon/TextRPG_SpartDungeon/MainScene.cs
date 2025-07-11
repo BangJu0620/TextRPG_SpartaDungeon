@@ -10,6 +10,7 @@ namespace TextRPG_SpartDungeon
         {
             ItemList itemList = new ItemList();
             HasItemList hasItemList = new HasItemList();
+            DungeonList dungeonList = new DungeonList();
             GameContext gameContext = new GameContext
             {
                 statusScene = new StatusScene(),
@@ -19,10 +20,12 @@ namespace TextRPG_SpartDungeon
                 player = new Character(1, "Chad", "전사", 10, 5, 100, 50000),
                 items = itemList.items,
                 hasItems = hasItemList.hasItems,
-                eventManager = new EventManager()
+                eventManager = new EventManager(),
+                dungeons = dungeonList.dungeons,
+                random = new Random(),
+                dungeonScene = new DungeonScene()
             };
-            
-            
+
 
             ToWriteText writeTxt = gameContext.loadMainScene.WriteText;
             ToCheckPlayerInput checkPlayerInput = gameContext.loadMainScene.CheckPlayerInput;

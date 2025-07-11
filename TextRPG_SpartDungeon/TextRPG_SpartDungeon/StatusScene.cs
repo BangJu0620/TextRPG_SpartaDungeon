@@ -25,6 +25,8 @@ namespace TextRPG_SpartDungeon
                 }
             }
 
+            Console.WriteLine("상태 보기\n캐릭터의 정보가 표시됩니다.\n");
+
             Console.WriteLine($"Lv. {gameContext.player.level.ToString("D2")}");
 
             Console.WriteLine($"{gameContext.player.name} ( {gameContext.player.job} )");

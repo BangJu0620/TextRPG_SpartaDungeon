@@ -10,6 +10,7 @@ namespace TextRPG_SpartDungeon
     {
         public void ShopListView(GameContext gameContext)
         {
+            Console.WriteLine("상점\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
             Console.WriteLine($"[보유골드]\n{gameContext.player.gold} G\n");
             Console.WriteLine($"[아이템 목록]");
 
@@ -65,6 +66,7 @@ namespace TextRPG_SpartDungeon
 
         public void HandleBuy(GameContext gameContext)
         {
+            Console.WriteLine("상점 - 아이템 구매\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
             Console.WriteLine($"[보유골드]\n{gameContext.player.gold} G\n");
             Console.WriteLine($"[아이템 목록]");
 
@@ -151,6 +153,7 @@ namespace TextRPG_SpartDungeon
 
         public void HandleSell(GameContext gameContext)
         {
+            Console.WriteLine("상점 - 아이템 판매\n필요한 아이템을 얻을 수 있는 상점입니다.\n");
             Console.WriteLine($"[보유골드]\n{gameContext.player.gold} G\n");
             Console.WriteLine($"[아이템 목록]");
 

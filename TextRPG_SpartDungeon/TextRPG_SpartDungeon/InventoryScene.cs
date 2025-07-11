@@ -10,6 +10,7 @@ namespace TextRPG_SpartDungeon
     {
         public void InventoryView(GameContext gameContext)
         {
+            Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.\n");
             Console.WriteLine("[아이템 목록]");
             foreach(ItemData item in gameContext.hasItems)
             {
@@ -56,6 +57,7 @@ namespace TextRPG_SpartDungeon
 
         public void HandleEquip(GameContext gameContext)
         {
+            Console.WriteLine("인벤토리 - 장착 관리\n보유 중인 아이템을 관리할 수 있습니다.\n");
             Console.WriteLine("[아이템 목록]");
             foreach (ItemData item in gameContext.hasItems)
             {
