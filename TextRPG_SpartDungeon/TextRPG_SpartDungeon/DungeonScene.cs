@@ -56,11 +56,13 @@ namespace TextRPG_SpartDungeon
             if(int.Parse(input) - 1 == i)
             {
                 int damage = gameContext.random.Next(gameContext.dungeons[i].lossHealthPoint[0], gameContext.dungeons[i].lossHealthPoint[1]) - gameContext.player.defensePoint + gameContext.dungeons[i].recommandDefensePoint;
-                float bonus = gameContext.random.Next(gameContext.player.attackPoint, gameContext.player.attackPoint * 2) * 0.01f;
+                float bonus = gameContext.random.Next((int)gameContext.player.attackPoint, (int)gameContext.player.attackPoint * 2) * 0.01f;
                 if(gameContext.player.defensePoint >= gameContext.dungeons[i].recommandDefensePoint)
                 {
                     if (gameContext.player.healthPoint > damage)
                     {
+                        gameContext.player.exp++;
+                        gameContext.eventManager.LevelUp(gameContext);
                         Console.WriteLine($"던전 클리어\n축하합니다!!\n{gameContext.dungeons[i].name}을 클리어 하셨습니다.");
 
                         Console.WriteLine($"\n[탐험 결과]\n체력 {gameContext.player.healthPoint} -> {gameContext.player.healthPoint - damage}");
@@ -99,6 +101,8 @@ namespace TextRPG_SpartDungeon
                         {
                             if (gameContext.player.healthPoint > damage)
                             {
+                                gameContext.player.exp++;
+                                gameContext.eventManager.LevelUp(gameContext);
                                 Console.WriteLine($"던전 클리어\n축하합니다!!\n{gameContext.dungeons[i].name}을 클리어 하셨습니다.");
 
                                 Console.WriteLine($"\n[탐험 결과]\n체력 {gameContext.player.healthPoint} -> {gameContext.player.healthPoint - damage}");

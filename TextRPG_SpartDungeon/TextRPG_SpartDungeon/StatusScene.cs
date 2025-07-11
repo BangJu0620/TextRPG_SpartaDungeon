@@ -61,12 +61,13 @@ namespace TextRPG_SpartDungeon
         public int level;
         public string name;
         public string job;
-        public int attackPoint;
+        public float attackPoint;
         public int defensePoint;
         public int healthPoint;
         public int gold;
+        public int exp;
 
-        public Character(int level, string name, string job, int attackPoint, int defensePoint, int healthPoint, int gold)
+        public Character(int level, string name, string job, float attackPoint, int defensePoint, int healthPoint, int gold, int exp)
         {
             this.level = level;
             this.name = name;
@@ -75,6 +76,7 @@ namespace TextRPG_SpartDungeon
             this.defensePoint = defensePoint;
             this.healthPoint = healthPoint;
             this.gold = gold;
+            this.exp = exp;
         }
 
     }

@@ -106,6 +106,19 @@ namespace TextRPG_SpartDungeon
                 }
             }
         }
+
+        public void LevelUp(GameContext gameContext)
+        {
+            if(gameContext.player.level == gameContext.player.exp)
+            {
+                Console.WriteLine("레벨업! 축하드립니다!");
+                Console.WriteLine($"Lv.{gameContext.player.level.ToString("D2")} -> {(gameContext.player.level + 1).ToString("D2")}\n");
+                gameContext.player.level++;
+                gameContext.player.exp = 0;
+                gameContext.player.attackPoint += 0.5f;
+                gameContext.player.defensePoint += 1;
+            }
+        }
     }
 
     public class GameContext
