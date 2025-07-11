@@ -169,5 +169,16 @@ namespace TextRPG_SpartDungeon
                 }
             }
         }
+
+        public static void RemoveItem(GameContext gameContext)
+        {
+            foreach(ItemData item in gameContext.items)
+            {
+                if(!item.isOwned)
+                {
+                    gameContext.hasItems.Remove(item);
+                }
+            }
+        }
     }
 }
