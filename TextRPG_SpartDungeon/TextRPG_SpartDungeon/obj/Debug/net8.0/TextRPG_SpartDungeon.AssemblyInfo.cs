@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TextRPG_SpartDungeon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b48d5a02523ab00c6a9560b26cfd59d41d47560b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d802e378f56ae3a5215d3c7cf7073ebd3c771c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("TextRPG_SpartDungeon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TextRPG_SpartDungeon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

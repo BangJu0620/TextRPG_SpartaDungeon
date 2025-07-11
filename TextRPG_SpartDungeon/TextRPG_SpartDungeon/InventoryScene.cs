@@ -104,6 +104,13 @@ namespace TextRPG_SpartDungeon
                         }
                         else
                         {
+                            foreach (ItemData item in gameContext.hasItems)
+                            {
+                                if (gameContext.hasItems[i - 1].itemType == item.itemType && item.isEquipped)
+                                {
+                                    item.isEquipped = false;
+                                }
+                            }
                             gameContext.hasItems[i - 1].isEquipped = true;
                         }
                     }
